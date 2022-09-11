@@ -9,8 +9,8 @@ const galleryRef = document.querySelector('.js-gallery');
 const btnLoadRef = document.querySelector('.js-load-more');
 const warnMessage = 'Sorry, there are no images matching your search query. Please try again.';
 
-let lightbox;
 const searchQuery = new SearchQuery();
+const lightbox = new SimpleLightbox('.gallery a');
 
 searchFormRef.addEventListener('submit', onSearchFormSubmit);
 btnLoadRef.addEventListener('click', onBtnLoadClick);
@@ -34,8 +34,7 @@ function onSearchFormSubmit(e) {
         throw new Error(warnMessage);
       }
       renderImages(hits);
-      lightbox = new SimpleLightbox('.gallery a');
-      console.log(lightbox);
+      lightbox.refresh();
       Notify.success(`Hooray! We found ${totalHits} images.`);
       btnLoadRef.classList.remove('isHidden');
       searchQuery.increasePage();
@@ -55,8 +54,13 @@ function onBtnLoadClick() {
       const { hits, totalHits } = response.data;
       renderImages(hits);
       lightbox.refresh();
-      console.log(lightbox);
       searchQuery.increasePage();
+
+      const { height } = galleryRef.firstElementChild.getBoundingClientRect();
+      window.scrollBy({
+        top: height * 2.5,
+        behavior: 'smooth',
+      });
 
       const {
         params: { page, per_page },

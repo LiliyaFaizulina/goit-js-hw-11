@@ -1,6 +1,11 @@
+body {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 p {
   margin: 0;
 }
+
 .search-form {
   position: fixed;
   width: 100vw;
@@ -27,6 +32,7 @@ p {
   padding: 0;
   cursor: pointer;
 }
+
 .search-img {
   display: block;
 }
@@ -47,15 +53,21 @@ p {
 }
 
 .gallery__item {
-  width: 220px;
+  display: block;
+  width: 330px;
   text-decoration: none;
   color: rgb(0, 128, 0);
   box-shadow: 1px 1px 3px 0px rgba(0, 128, 0, 0.5);
+  transition: transform 250ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.gallery__item:hover {
+  transform: scale(1.03);
 }
 
 .thumb {
-  width: 220px;
-  height: 138px;
+  width: 330px;
+  height: 210px;
 }
 
 .gallery__image {
@@ -69,9 +81,8 @@ p {
   padding: 10px 5px;
   display: flex;
   gap: 5px;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
-  flex-grow: 1;
 }
 
 .btn-load {
