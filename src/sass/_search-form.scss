@@ -46,7 +46,7 @@ p {
   row-gap: 10px;
 }
 
-.photo-card {
+.gallery__item {
   width: 220px;
   text-decoration: none;
   color: rgb(0, 128, 0);
@@ -58,7 +58,7 @@ p {
   height: 138px;
 }
 
-.photo {
+.gallery__image {
   display: block;
   width: 100%;
   height: 100%;

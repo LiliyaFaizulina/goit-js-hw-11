@@ -34,10 +34,8 @@ function onSearchFormSubmit(e) {
         throw new Error(warnMessage);
       }
       renderImages(hits);
-      lightbox = new SimpleLightbox('.gallery a', {
-        captionsData: 'alt',
-        captionDelay: 250,
-      });
+      lightbox = new SimpleLightbox('.gallery a');
+      console.log(lightbox);
       Notify.success(`Hooray! We found ${totalHits} images.`);
       btnLoadRef.classList.remove('isHidden');
       searchQuery.increasePage();
@@ -57,6 +55,7 @@ function onBtnLoadClick() {
       const { hits, totalHits } = response.data;
       renderImages(hits);
       lightbox.refresh();
+      console.log(lightbox);
       searchQuery.increasePage();
 
       const {
