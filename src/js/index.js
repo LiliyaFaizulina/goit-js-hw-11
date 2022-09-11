@@ -1,8 +1,8 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import { createGalleryMarkup } from './js/createMarkup';
-import { SearchQuery } from './js/fetchSearch';
+import { createGalleryMarkup } from './module/createMarkup';
+import { SearchQuery } from './module/fetchSearch';
 
 const searchFormRef = document.querySelector('.js-search-form');
 const galleryRef = document.querySelector('.js-gallery');
