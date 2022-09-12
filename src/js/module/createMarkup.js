@@ -4,7 +4,7 @@ export function createGalleryMarkup(arr) {
       acc +
       `<a class="gallery__item" href=${largeImageURL}>
   <div class="thumb">
-  <img class="gallery__image" src=${webformatURL} alt=${tags} loading="lazy"/>
+  <img class="gallery__image" src=${webformatURL} alt="${tags}" loading="lazy"/>
   </div>
   <div class="info">
     <p class="info__item">
