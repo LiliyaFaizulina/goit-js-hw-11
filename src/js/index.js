@@ -36,7 +36,6 @@ function onSearchFormSubmit(e) {
         throw new Error(warnMessage);
       }
       renderImages(hits);
-      lightbox.refresh();
       Notify.success(`Hooray! We found ${totalHits} images.`);
       btnLoadRef.classList.remove('isHidden');
       searchQuery.increasePage();
@@ -47,6 +46,7 @@ function onSearchFormSubmit(e) {
 function renderImages(arr) {
   const markup = createGalleryMarkup(arr);
   galleryRef.insertAdjacentHTML('beforeend', markup);
+  lightbox.refresh();
 }
 
 function onBtnLoadClick() {
@@ -55,7 +55,6 @@ function onBtnLoadClick() {
     .then(response => {
       const { hits, totalHits } = response.data;
       renderImages(hits);
-      lightbox.refresh();
       searchQuery.increasePage();
 
       const { height } = galleryRef.firstElementChild.getBoundingClientRect();
