@@ -1,0 +1,22 @@
+.btn-load {
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: block;
+  padding: 5px 15px;
+  background-color: rgb(0, 128, 0);
+  color: rgb(255, 255, 255);
+  border: none;
+  box-shadow: 1px 1px 3px 0px rgba(0, 128, 0, 0.5);
+  cursor: pointer;
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.btn-load:focus,
+.btn-load:hover {
+  transform: scale(1.1);
+}
+
+.isHidden {
+  display: none;
+}
