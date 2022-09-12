@@ -11,7 +11,7 @@ const warnMessage = 'Sorry, there are no images matching your search query. Plea
 
 const searchQuery = new SearchQuery();
 const lightbox = new SimpleLightbox('.gallery a', {
-  navText: ['<', '>'],
+  navText: ['&lArr;', '&rArr;'],
 });
 
 searchFormRef.addEventListener('submit', onSearchFormSubmit);
