@@ -17,7 +17,7 @@ const lightbox = new SimpleLightbox('.gallery a', {
 searchFormRef.addEventListener('submit', onSearchFormSubmit);
 btnLoadRef.addEventListener('click', onBtnLoadClick);
 
-function onSearchFormSubmit(e) {
+async function onSearchFormSubmit(e) {
   e.preventDefault();
   btnLoadRef.classList.add('isHidden');
   galleryRef.innerHTML = '';
@@ -28,19 +28,19 @@ function onSearchFormSubmit(e) {
     return;
   }
   searchQuery.setPage();
-  searchQuery
-    .getResponse(query)
-    .then(response => {
-      const { hits, totalHits } = response.data;
-      if (!hits.length) {
-        throw new Error(warnMessage);
-      }
-      renderImages(hits);
-      Notify.success(`Hooray! We found ${totalHits} images.`);
-      btnLoadRef.classList.remove('isHidden');
-      searchQuery.increasePage();
-    })
-    .catch(err => Notify.warning(err.message));
+  try {
+    const response = await searchQuery.getResponse(query);
+    const { hits, totalHits } = response.data;
+    if (!hits.length) {
+      throw new Error(warnMessage);
+    }
+    renderImages(hits);
+    Notify.success(`Hooray! We found ${totalHits} images.`);
+    btnLoadRef.classList.remove('isHidden');
+    searchQuery.increasePage();
+  } catch (err) {
+    Notify.warning(err.message);
+  }
 }
 
 function renderImages(arr) {
@@ -49,27 +49,27 @@ function renderImages(arr) {
   lightbox.refresh();
 }
 
-function onBtnLoadClick() {
-  searchQuery
-    .getResponse()
-    .then(response => {
-      const { hits, totalHits } = response.data;
-      renderImages(hits);
-      searchQuery.increasePage();
+async function onBtnLoadClick() {
+  try {
+    const response = await searchQuery.getResponse();
+    const { hits, totalHits } = response.data;
+    renderImages(hits);
+    searchQuery.increasePage();
 
-      const { height } = galleryRef.firstElementChild.getBoundingClientRect();
-      window.scrollBy({
-        top: height * 2.5,
-        behavior: 'smooth',
-      });
+    const { height } = galleryRef.firstElementChild.getBoundingClientRect();
+    window.scrollBy({
+      top: height * 2.5,
+      behavior: 'smooth',
+    });
 
-      const {
-        params: { page, per_page },
-      } = searchQuery;
-      if (page > totalHits / per_page) {
-        btnLoadRef.classList.add('isHidden');
-        throw new Error("We're sorry, but you've reached the end of search results.");
-      }
-    })
-    .catch(err => Notify.info(err.message));
+    const {
+      params: { page, per_page },
+    } = searchQuery;
+    if (page > totalHits / per_page) {
+      btnLoadRef.classList.add('isHidden');
+      throw new Error("We're sorry, but you've reached the end of search results.");
+    }
+  } catch (err) {
+    Notify.info(err.message);
+  }
 }
