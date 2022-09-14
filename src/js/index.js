@@ -36,8 +36,10 @@ async function onSearchFormSubmit(e) {
     }
     renderImages(hits);
     Notify.success(`Hooray! We found ${totalHits} images.`);
-    btnLoadRef.classList.remove('isHidden');
-    searchQuery.increasePage();
+    if (hits.length > searchQuery.params.per_page) {
+      btnLoadRef.classList.remove('isHidden');
+      searchQuery.increasePage();
+    }
   } catch (err) {
     Notify.warning(err.message);
   }
