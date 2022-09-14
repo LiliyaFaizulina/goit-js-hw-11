@@ -36,7 +36,7 @@ async function onSearchFormSubmit(e) {
     }
     renderImages(hits);
     Notify.success(`Hooray! We found ${totalHits} images.`);
-    if (hits.length > searchQuery.params.per_page) {
+    if (totalHits > searchQuery.params.per_page) {
       btnLoadRef.classList.remove('isHidden');
       searchQuery.increasePage();
     }
